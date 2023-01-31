@@ -1,26 +1,16 @@
-name: Format Code
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Format
+
+on: [ push, pull_request ]
+
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Google Java Format
-      # You may pin to the exact commit or the version.
-      # uses: axel-op/googlejavaformat-action@fe78db8a90171b6a836449f8d0e982d5d71e5c5a
-        uses: axel-op/googlejavaformat-action@v3.6.0
-        with:
-        # Arguments for the Google Java Format executable
-          #args:  # optional, default is --replace
-          # Pattern to match the files to be formatted
-          #files: \**/*.java
-          # Pattern to match the files to be ignored by this action
-          #files-excluded: # optional
-          # Set to true to not commit the changes
-          #skipCommit: # optional, default is false
-          # Version of Google Java Format to use
-          #version: # optional
-          # Recommended on MacOS machines
-          #githubToken: # optional
-          # Commit message
-          commitMessage: Format Java # optional, default is Google Java Format
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 # v2 minimum required
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--replace"
+          skip-commit: true
+      - name: Print diffs
+        # "--exit-code" will make this command exit with code 1 if there is a diff
+        run: git --no-pager diff --exit-code
