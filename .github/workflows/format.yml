@@ -11,9 +11,9 @@ jobs:
         uses: axel-op/googlejavaformat-action@v3.6.0
         with:
         # Arguments for the Google Java Format executable
-          args: -n # optional, default is --replace
+          #args:  # optional, default is --replace
           # Pattern to match the files to be formatted
-          files: \**/*.java
+          #files: \**/*.java
           # Pattern to match the files to be ignored by this action
           #files-excluded: # optional
           # Set to true to not commit the changes
